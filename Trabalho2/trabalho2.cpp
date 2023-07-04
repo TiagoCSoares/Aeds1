@@ -1,14 +1,15 @@
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
-#include <time.h>
+
 
 using namespace std;
 
-void bubblesort(long long int v[], long long int n){
+void bubblesort(int v[], int n){
   double time_spent = 0.0;
   int i, j;
-  int count;
+  long long int count = 0;
   bool swapped;
   clock_t begin = clock();
   //for(i = 0; i < n; i++) {
@@ -47,7 +48,7 @@ cout << n << endl;
   
 }
 
-void insertionsort(long long int v[],long long int n){
+void insertionsort(int v[], int n){
   double time_spent = 0.0;
   int i, j, posicao;
   long long int count = 0;
@@ -83,7 +84,7 @@ cout << n << endl;
 
 
 
-void selectionsort(long long int v[],long long int n){
+void selectionsort(int v[], int n){
   double time_spent = 0.0;   
   int i, j, menor, aux, valor;
   valor = n;
@@ -125,10 +126,10 @@ cout << n << endl;
 }
 
 
-long long int* gera_aleatorio (long long int n) {
+int* gera_aleatorio (int n) {
   unsigned seed = time(0);
-  long long int i;
-  long long int* vetor = new long long int[n];
+  int i;
+  int* vetor = new int[n];
 
   for(i = 0; i < n; i++){
       vetor[i] = i;
@@ -142,8 +143,8 @@ long long int* gera_aleatorio (long long int n) {
   return vetor;
 }  
 
-long long int* gera_ordenado (long long int n) {
-  long long int* vetor = new long long int[n];
+int* gera_ordenado (int n) {
+  int* vetor = new int[n];
   int i;
   for (i = 0; i < n;i++) {
     vetor[i] = i;
@@ -152,10 +153,10 @@ long long int* gera_ordenado (long long int n) {
   return vetor;
 }
 
-long long int* gera_decrescente (long long int n) {
-  long long int* vetor = new long long int[n];
+int* gera_decrescente (int n) {
+  int* vetor = new int[n];
   int i;
-  long long int aux = n;
+  int aux = n;
   for(i = 0;i < aux;i++){
     vetor[i] = n-1;
     n--;
@@ -163,23 +164,23 @@ long long int* gera_decrescente (long long int n) {
   return vetor;
 }
 
-void imprimevetor(long long int v[], long long int n){
+void imprimevetor(int v[], int n){
   for (int i = 0; i < n; i++)
     cout << "  " << v[i];
   cout << endl;
 }
 
 int main(int argc, char**argv){
-  long long int n = 100;
+  int n = 100;
   int i;
   cout << endl << "Vetor aleatório tamanho" << n << ":" << endl;
 
-  long long int* vetor_aleatorio = gera_aleatorio(n);
-  long long int* vetor_ordenado = gera_ordenado(n);
-  long long int* vetor_decrescente = gera_decrescente(n);
+  int* vetor_aleatorio;
+  int* vetor_ordenado;
+  int* vetor_decrescente;
 
 
-  for(n = 100; n < 10000; n += 100) {
+  for(n = 100000; n < 100001; n += 100) {
   //long long int *vetor_aux;
   //vetor_aux = (long long int *)malloc(n * sizeof(int));
   //for( i = 0; i < n; i++){
@@ -213,6 +214,7 @@ int main(int argc, char**argv){
   vetor_ordenado = gera_ordenado(n);
   vetor_decrescente = gera_decrescente(n);
   cout << "Bubble Sort, vetor aleatorio: " << endl;
+
   //imprimevetor(vetor_aleatorio, n);
   bubblesort(vetor_aleatorio, n);
   //imprimevetor(vetor_aleatorio, n);
@@ -230,7 +232,9 @@ int main(int argc, char**argv){
   bubblesort(vetor_decrescente, n);
   //imprimevetor(vb2, 10);
   cout << endl << endl;
-
+  delete[] vetor_aleatorio;
+  delete[] vetor_ordenado;
+  delete[] vetor_decrescente;
 
 
 
@@ -260,6 +264,9 @@ int main(int argc, char**argv){
   selectionsort(vetor_decrescente, n);
   //imprimevetor(vb2, 10);
   cout << endl << endl;
+  delete[] vetor_aleatorio;
+  delete[] vetor_ordenado;
+  delete[] vetor_decrescente;
 
 
 
@@ -286,6 +293,9 @@ int main(int argc, char**argv){
   insertionsort(vetor_decrescente, n);
   //imprimevetor(vb2, 10);
   cout << endl << endl;
+  delete[] vetor_aleatorio;
+  delete[] vetor_ordenado;
+  delete[] vetor_decrescente;
   }
   return 0;
 }
